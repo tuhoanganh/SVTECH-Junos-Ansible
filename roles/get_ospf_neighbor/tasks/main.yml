@@ -1,0 +1,4 @@
+---
+# tasks file for juniper_test
+- include: get_ospf_neighbor.yml
+

@@ -1,0 +1,8 @@
+---
+- name: INFORMATION - [STEP 01] - Request System Snapshot
+  juniper_junos_command:
+    cli: "request system snapshot slice alternate"
+    host: "{{ ansible_host }}" 
+    user: "{{ juniper_user }}"
+    passwd: "{{ juniper_passwd }}"
+    timeout: 120

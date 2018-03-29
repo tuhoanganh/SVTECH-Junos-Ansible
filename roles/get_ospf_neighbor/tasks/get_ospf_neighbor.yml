@@ -1,0 +1,20 @@
+---
+- name: INFORMATION - [Step 01] - Get Date
+  set_fact: date_info="{{lookup('pipe','date +%Y%m%d')}}"
+  run_once: true
+  delegate_to: localhost
+
+- name: INFORMATION - [Step 02] - Set directory for storing the temp and configuration files
+  set_fact:
+    default_path: "files/tmp"
+  run_once: true
+  delegate_to: localhost
+
+- name: INFORMATION - [STEP 07] - Get OSPF Neighbor with format XML
+  juniper_junos_command:
+    cli: "show ospf neighbor"
+    dest: "{{ default_path }}/{{ inventory_hostname }}_collect_1_command.xml"
+    format: xml
+    host: "{{ ansible_host }}" 
+    user: "{{ juniper_user }}"
+    passwd: "{{ juniper_passwd }}"

@@ -1,0 +1,6 @@
+hostname: lab-vMX-02
+sitename: test02
+
+interfaces_description:
+  - { src_port: ge-1/1/0, src_ip: 10.248.66.22, dest_hostname: ME-CSR-HNI-C88.1, dest_sitename: HN_CGY_NGUYEN_THI_DINH, dest_port: ge-1/1/1, dest_ip: 10.98.0.107 }
+  - { src_port: ge-1/1/1, src_ip: 10.248.66.25, dest_hostname: ME-CSR-HNI-C88.3, dest_sitename: HN_CGY_DUONG_QUANG_HAM_2, dest_port: ge-1/1/0, dest_ip: 10.98.0.109 }

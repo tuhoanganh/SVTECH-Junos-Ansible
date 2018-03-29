@@ -1,0 +1,22 @@
+---
+- hosts: lab-vMX-01 lab-vMX-02 lab-vMX-03
+  serial: 100
+  gather_facts: no
+  connection: local
+  vars_prompt:
+    - name: juniper_user
+      prompt: User
+      private: no
+    - name: juniper_passwd
+      prompt: Password
+      private: yes
+  pre_tasks:
+    - name: "VARIABLES - Set Variable Ansible Log Prefix"
+      set_fact: log_prefix="set_snmp_name"
+      run_once: true
+      delegate_to: localhost
+  roles:
+    - role: Juniper.junos
+    - role: ansible_log_rotato
+    - role: check_netconf
+    - role: set_snmp_name

@@ -1,0 +1,12 @@
+---
+- name: CHECKING - [Step 01] - Verifying SSH
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    port: 22
+    timeout: 15
+
+- name: CHECKING - [Step 02] - Verifying NETCONF
+  wait_for: 
+    host: "{{ ansible_ssh_host }}"
+    port: 830
+    timeout: 15

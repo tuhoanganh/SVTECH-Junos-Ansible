@@ -1,0 +1,23 @@
+---
+- hosts: all
+  gather_facts: no
+  serial: 100
+  connection: local
+  vars_prompt:
+    - name: juniper_user
+      prompt: User
+      private: no
+    - name: juniper_passwd
+      prompt: Password
+      private: yes
+  pre_tasks:
+    - name: "VARIABLES - Set Variables Ansible Log Prefix"
+      set_fact: log_prefix="set_system_snapshot"
+      run_once: true
+      delegate_to: localhost
+
+  roles:
+    - role: Juniper.junos
+    - role: ansible_log_rotato
+    - role: check_netconf
+    - role: set_system_snapsnot

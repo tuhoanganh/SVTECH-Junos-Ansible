@@ -1,0 +1,5 @@
+---
+- name: "[ANSIBLE LOGGING] - Create Ansible log for this run"
+  shell: "mv {{ playbook_dir}}/logs/ansible.log {{ playbook_dir }}/logs/{{ log_prefix }}-{{ lookup('pipe', 'date +%Y%m%d-%H%M') }}.log"
+  delegate_to: localhost
+  run_once: true

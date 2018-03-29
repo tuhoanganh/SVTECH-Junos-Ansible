@@ -1,0 +1,4 @@
+---
+# tasks file for juniper_test
+- include: set_snmp_name.yml
+

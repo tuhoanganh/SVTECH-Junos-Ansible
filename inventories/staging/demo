@@ -1,0 +1,6 @@
+[juniper]
+lab_SRT_01 ansible_host=10.96.10.101
+
+[all:vars]
+#Variables for connect SSH
+ansible_port = 22
