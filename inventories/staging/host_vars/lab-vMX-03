@@ -2,5 +2,16 @@ hostname: lab-vMX-03
 sitename: test03
 
 interfaces_description:
-  - { src_port: ge-1/1/0, src_ip: 10.248.66.26, dest_hostname: ME-CSR-HNI-C88.2, dest_sitename: HN_CGY_VIEN_DAU_KHI_IBC, dest_port: ge-1/1/1, dest_ip: 10.98.0.107 }
-  - { src_port: ge-1/1/1, src_ip: 10.248.66.29, dest_hostname: ME-CSR-HNI-C88.4, dest_sitename: HN_CGY_DTM_DICH_VONG, dest_port: ge-1/1/0, dest_ip: 10.98.0.108 }
+  - src_port: ge-1/1/0
+    src_ip: 10.248.66.26
+    dest_hostname: ME-CSR-HNI-C88.2
+    dest_sitename: HN_CGY_VIEN_DAU_KHI_IBC
+    dest_port: ge-1/1/1
+    dest_ip: 10.98.0.107
+
+  - src_port: ge-1/1/1
+    src_ip: 10.248.66.29
+    dest_hostname: ME-CSR-HNI-C88.4
+    dest_sitename: HN_CGY_DTM_DICH_VONG
+    dest_port: ge-1/1/0
+    dest_ip: 10.98.0.108

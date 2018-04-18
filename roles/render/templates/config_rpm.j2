@@ -1,0 +1,20 @@
+services {
+  rpm {
+    probe Uplink {
+{% for i in interfaces_description %}
+      test {{ i.src_port }} {
+        probe-type {{ probe_type }};
+        target address {{ i.dest_ip }};
+        probe-count {{ probe_count }};
+        probe-interval {{ probe_interval }};
+        test-interval {{ test_interval }};
+        thresholds {
+          total-loss {{ total_loss }};
+        }
+        hardware-timestamp;
+      } 
+{% endfor %}
+    }
+  }
+}
+

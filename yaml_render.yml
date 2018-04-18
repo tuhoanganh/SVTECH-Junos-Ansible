@@ -1,0 +1,62 @@
+---
+- hosts: all
+  serial: 100
+  gather_facts: no
+  connection: local
+  vars_prompt:
+    - name: juniper_user
+      prompt: User
+      private: no
+    - name: juniper_password
+      prompt: Password
+      private: yes
+  pre_tasks:
+    - name: "PRETASK - [Step 01] - Generate Credential"
+      set_fact:
+        credential: 
+          user: "{{ juniper_user }}"
+          passwd: "{{ juniper_password }}"
+          host: "{{ '{{' }} ansible_host {{ '}}' }}"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "PRETASK - [Step 02] - Set Variable Ansible Log Prefix"
+      set_fact: log_prefix="render"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "VARIABLES - [Step 01] - Set variable for RPM: probe-type"
+      set_fact: probe_type="icmp-ping"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "VARIABLES - [Step 02] - Set variable for RPM: probe-count"
+      set_fact: probe_count="15"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "VARIABLES - [Step 03] - Set variable for RPM: probe-interval"
+      set_fact: probe_interval="1"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "VARIABLES - [Step 04] - Set variable for RPM: test-interval"
+      set_fact: test_interval="20"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "VARIABLES - [Step 05] - Set variable for RPM: total-loss"
+      set_fact: total_loss="3"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "VARIABLES - [Step 06] - Set variable for RPM: hardware-timestamp"
+      set_fact: hardware_timestamp="hardware-timestamp"
+      run_once: true
+      delegate_to: localhost
+
+  roles:
+    - role: Juniper.junos
+    - role: ansible_log_rotato
+    - role: check_netconf
+    - role: render

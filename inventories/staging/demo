@@ -1,5 +1,7 @@
 [juniper]
-lab_SRT_01 ansible_host=10.96.10.101
+lab-vMX-01 ansible_host=10.98.0.107
+lab-vMX-02 ansible_host=10.98.0.108
+lab-vMX-03 ansible_host=10.98.0.109
 
 [all:vars]
 #Variables for connect SSH

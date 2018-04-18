@@ -1,0 +1,39 @@
+---
+- name: INFORMATION - [Step 01] - Get Date
+  set_fact: date_info="{{lookup('pipe','date +%Y%m%d')}}"
+  run_once: true
+  delegate_to: localhost
+
+- name: INFORMATION - [Step 02] - Set directory for storing the temp and configuration files
+  set_fact:
+    default_path: "files/tmp"
+  run_once: true
+  delegate_to: localhost
+
+- name: INFORMATION - [STEP 03] - Render RPM's Config
+  template:
+    src: "{{ role_path }}/templates/config_rpm.j2"
+    dest: "{{ default_path }}/{{ inventory_hostname }}.conf"
+   
+- name: CONFIGURATION - [STEP 04] - Push RPM's config
+  juniper_junos_config:
+#    provider: "{{ credential }}"
+    config_mode: private
+    host: "{{ ansible_host }}"
+    user: "{{ juniper_user }}"
+    passwd: "{{ juniper_password }}"
+    load: "merge"
+    src: "{{ default_path }}/{{ inventory_hostname }}.conf"
+  register: response
+
+- name: INFOMATION - [STEP 05] -Print the config changes.
+  debug:
+    var: response.diff_lines
+
+- name: INFORMATION - [STEP 06] - Clear Temp file
+  shell:  "{{ item  }}"
+  with_items:
+    - "find {{ default_path }}/*.conf -delete"
+  run_once: true
+  delegate_to: localhost
+

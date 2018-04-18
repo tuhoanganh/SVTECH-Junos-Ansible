@@ -11,7 +11,16 @@
       prompt: Password
       private: yes
   pre_tasks:
-    - name: "VARIABLES - Set Variables Ansible Log Prefix"
+    - name: "PRETASK - [Step 01] - Generate Credential"
+      set_fact:
+        credential:
+          user: "{{ juniper_user }}"
+          passwd: "{{ juniper_password }}"
+          host: "{{ '{{' }} ansible_host {{ '}}' }}"
+      run_once: true
+      delegate_to: localhost
+
+    - name: "PRETASK - [Step 02] - Set Variables Ansible Log Prefix"
       set_fact: log_prefix="set_system_snapshot"
       run_once: true
       delegate_to: localhost
