@@ -17,7 +17,6 @@
    
 - name: CONFIGURATION - [STEP 04] - Push RPM's config
   juniper_junos_config:
-#    provider: "{{ credential }}"
     config_mode: private
     host: "{{ ansible_host }}"
     user: "{{ juniper_user }}"
